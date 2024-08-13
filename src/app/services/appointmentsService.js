@@ -21,7 +21,6 @@ class AppointmentsService {
             procedure_id
         } = data;
 
-        // Verifica se doctor_id e procedure_id existem
         const doctor = await Doctors.findByPk(doctor_id);
         if (!doctor) {
             throw new Error('O médico com o ID fornecido não existe.');
@@ -32,7 +31,6 @@ class AppointmentsService {
             throw new Error('O procedimento com o ID fornecido não existe.');
         }
 
-        // Verifica se os campos types_of_service e unit são obrigatórios
         if (!types_of_service || !unit) {
             throw new Error('Os campos types_of_service e unit são obrigatórios.');
         }
@@ -71,13 +69,12 @@ class AppointmentsService {
             }
         }
 
-        // Prepara os dados para criar o agendamento
         const appointmentData = {
             types_of_service,
             unit,
             patient_id: patient.id,
-            doctor_id: doctor.id, // Adiciona o doctor_id
-            procedure_id: procedure.id, // Adiciona o procedure_id
+            doctor_id: doctor.id, 
+            procedure_id: procedure.id,
             description,
             status: status || 'ATIVO', 
         };

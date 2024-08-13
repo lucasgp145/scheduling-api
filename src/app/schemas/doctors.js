@@ -12,7 +12,7 @@ const doctorsSchema = {
       cpf: string()
         .required('O CPF é obrigatório.')
         .matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$/, 'O CPF deve estar no formato válido: 000.000.000-00 ou 00000000000.'),
-    }),
+    }).unknown(),
   },
   find: {
     params: object({

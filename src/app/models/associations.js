@@ -1,7 +1,7 @@
 import Patients from './Patients';
-import Appointments from './appointments'; // Corrigido: nome da importação para Appointments
-import Doctors from './doctors'; // Importação do modelo Doctors
-import Procedures from './procedures'; // Importação do modelo Procedures
+import Appointments from './appointments';
+import Doctors from './doctors';
+import Procedures from './procedures';
 
 const initAssociations = () => {
     Patients.hasMany(Appointments, { foreignKey: 'patient_id' }); // Um paciente pode ter muitos agendamentos

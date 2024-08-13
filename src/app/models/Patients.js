@@ -6,7 +6,14 @@ class Patients extends Model {
             {
                 name: Sequelize.STRING,
                 email: Sequelize.STRING,
-                cpf: Sequelize.STRING,
+                cpf: {
+                    type: Sequelize.STRING,
+                    allowNull: false,
+                    unique: true,
+                    validate: {
+                        is: /^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$/, // Formato válido do CPF
+                    },
+                },
                 date_of_birth: Sequelize.DATE,
                 insurance: Sequelize.STRING,
             },

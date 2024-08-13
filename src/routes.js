@@ -20,7 +20,7 @@ routes.get('/patients/:id', SchemaValidator.validate(PatientSchema.find), Patien
 routes.put('/patients/:id', SchemaValidator.validate(PatientSchema.update), PatientController.Update);
 routes.delete('/patients/:id', SchemaValidator.validate(PatientSchema.delete), PatientController.Delete);
 
-// Routes for Patients
+// Routes for appointments
 routes.post('/appointments/', SchemaValidator.validate(appointmentsSchema.create), appointmentsController.Create);
 routes.get('/appointments/:id', SchemaValidator.validate(appointmentsSchema.find), appointmentsController.GetById);
 routes.get('/appointments/', SchemaValidator.validate(appointmentsSchema.list), appointmentsController.GetAll);

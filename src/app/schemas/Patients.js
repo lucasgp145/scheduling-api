@@ -20,11 +20,16 @@ const patientSchema = {
       date_of_birth: date()
         .max(new Date(), 'A data de nascimento não pode ser no futuro.')
         .required('A data de nascimento é obrigatória.'),
-    }),
+    }).noUnknown(),
   },
   find: {
     params: object({
       id: number().required('O ID do paciente é obrigatório.'),
+    }).noUnknown(),
+  },
+  list: {
+    query: object({
+      search: string().max(255).nullable(),
     }).noUnknown(),
   },
   update: {
@@ -46,7 +51,7 @@ const patientSchema = {
       date_of_birth: date()
         .max(new Date(), 'A data de nascimento não pode ser no futuro.')
         .nullable(),
-    }),
+    }).noUnknown(),
     params: object({
       id: number().required('O ID do paciente é obrigatório.'),
     }).noUnknown(),
@@ -59,11 +64,12 @@ const patientSchema = {
 };
 
 export default {
-  create: object(patientSchema.create.body),
-  find: object(patientSchema.find.params),
+  create: object(patientSchema.create),
+  find: object(patientSchema.find),
+  list: object(patientSchema.list),
   update: object({
     body: patientSchema.update.body,
     params: patientSchema.update.params,
   }),
-  delete: object(patientSchema.delete.params),
+  delete: object(patientSchema.delete),
 };

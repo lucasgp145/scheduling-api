@@ -9,7 +9,7 @@ const proceduresSchema = {
       types_of_service: string()
         .required('O tipo de serviço é obrigatório.')
         .max(255, 'O tipo de serviço deve ter no máximo 255 caracteres.'),
-    }),
+    }).unknown,
   },
   find: {
     params: object({

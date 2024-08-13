@@ -20,7 +20,7 @@ export default class SchemaValidator {
           status: 'error',
           type_error: 'VALIDATION_ERROR',
           field: error.path,
-          message: error
+          message: error.message
         });
       }
     };

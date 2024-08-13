@@ -1,9 +1,26 @@
-import { object, string, number, mixed } from 'yup';
+import { object, string, number, mixed, date } from 'yup';
 
 const appointmentsSchema = {
   create: {
     body: object({
-      patient_id: number().nullable(),
+        name: string()
+          .max(100, 'O nome deve ter no máximo 100 caracteres.')
+          .required('O nome é obrigatório.'),
+        email: string()
+          .email('O e-mail deve ser um endereço de e-mail válido.')
+          .max(255, 'O e-mail deve ter no máximo 255 caracteres.')
+          .required('O e-mail é obrigatório.'),
+        cpf: string()
+          .length(11, 'O CPF deve ter exatamente 11 dígitos.')
+          .matches(/^\d+$/, 'O CPF deve conter apenas números.')
+          .required('O CPF é obrigatório.'),
+        insurance: string()
+          .max(100, 'O seguro deve ter no máximo 100 caracteres.')
+          .required('O seguro é obrigatório.'),
+        date_of_birth: date()
+          .max(new Date(), 'A data de nascimento não pode ser no futuro.')
+          .required('A data de nascimento é obrigatória.'),
+     
       doctor_id: number()
         .required('O ID do médico é obrigatório.'),
       procedure_id: number()
@@ -33,16 +50,13 @@ const appointmentsSchema = {
     }).noUnknown(),
   },
   update: {
-    body: object({
-      patient_id: number().nullable(),
-      doctor_id: number().nullable(),
-      procedure_id: number().nullable(),
-      types_of_service: string().max(255).nullable(),
-      unit: string().max(100).nullable(),
-      description: string().max(500).nullable(),
-      status: mixed()
-        .oneOf(['ATIVO', 'INATIVO'], 'O status deve ser "ATIVO" ou "INATIVO".')
-        .nullable(),
+      patient: object({
+        doctor_id: number().nullable(),
+        procedure_id: number().nullable(),
+        types_of_service: string().max(255).nullable(),
+        unit: string().max(100).nullable(),
+        description: string().max(500).nullable(),
+        status: mixed().oneOf(['ATIVO', 'INATIVO']).nullable(),
     }),
     params: object({
       id: number().required('O ID do agendamento é obrigatório.'),
