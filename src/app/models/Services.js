@@ -7,6 +7,7 @@ class Services extends Model {
                 types_of_service: Sequelize.STRING,
                 unit: Sequelize.STRING,
                 description: Sequelize.STRING,
+
                 patient_id: {
                     type: Sequelize.INTEGER,
                     allowNull: false,
@@ -14,6 +15,11 @@ class Services extends Model {
                         model: 'patients',
                         key: 'id',
                     },
+                },
+                status: { 
+                    type: Sequelize.ENUM('ATIVO', 'INATIVO'), 
+                    allowNull: false,
+                    defaultValue: 'ATIVO',
                 },
             },
             {
@@ -24,10 +30,7 @@ class Services extends Model {
                 updatedAt: 'updated_at', 
             }
         ); 
-        
     }
-
- 
 }
 
 export default Services;

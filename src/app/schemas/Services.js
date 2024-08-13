@@ -1,9 +1,9 @@
-import { object, string, number, date, cpf } from 'yup';
+import { object, string, number, mixed } from 'yup';
 
 const ServiceSchema = {
   create: {
     body: object({
-      patient_id: number(),
+      patient_id: number().nullable(),
       types_of_service: string()
         .max(255, 'O tipo de serviço deve ter no máximo 255 caracteres.')
         .required('O tipo de serviço é obrigatório.'),
@@ -23,6 +23,9 @@ const ServiceSchema = {
       date_of_birth: string()
         .required('A data de nascimento é obrigatória.')
         .matches(/^\d{4}-\d{2}-\d{2}$/, 'A data de nascimento deve estar no formato YYYY-MM-DD.'),
+      status: mixed()
+        .oneOf(['ATIVO', 'INATIVO'], 'O status deve ser "ATIVO" ou "INATIVO".')
+        .default('ATIVO'),
     }),
   },
   find: {
@@ -40,6 +43,9 @@ const ServiceSchema = {
       types_of_service: string().max(255).nullable(),
       unit: string().max(100).nullable(),
       description: string().max(500).nullable(),
+      status: mixed()
+        .oneOf(['ATIVO', 'INATIVO'], 'O status deve ser "ATIVO" ou "INATIVO".')
+        .nullable(), 
     }),
     params: object({
       id: number().required('O ID do serviço é obrigatório.'),

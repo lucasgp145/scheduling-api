@@ -5,18 +5,32 @@ import Services from '../models/Services';
 class ServicesController {
     async Create(req, res) {
         try {
-            const { patient_id, types_of_service, unit, name, email, cpf, insurance, date_of_birth, description } = req.body;
+            const { 
+                patient_id, 
+                types_of_service, 
+                unit, 
+                name, 
+                email, 
+                cpf, 
+                insurance, 
+                date_of_birth, 
+                description, 
+                status 
+            } = req.body;
 
+            
             if (!types_of_service || !unit) {
                 return res.status(400).json({ error: 'Os campos types_of_service e unit são obrigatórios.' });
             }
 
             let patient;
 
+            
             if (patient_id) {
                 patient = await Patients.findByPk(patient_id);
             }
 
+           
             if (!patient) {
                 if (!name || !email || !cpf || !insurance || !date_of_birth) {
                     return res.status(400).json({ error: 'Os campos name, email, cpf, insurance e date_of_birth são obrigatórios para criar um novo paciente.' });
@@ -52,6 +66,7 @@ class ServicesController {
                 unit,
                 patient_id: patient.id,
                 description,
+                status: status || 'ATIVO', 
             };
 
             const service = await Services.create(serviceData);
@@ -65,7 +80,7 @@ class ServicesController {
 
     async GetAll(req, res) {
         try {
-            const services = await Services.findAll({ include: Patients }); // Inclui os dados do paciente
+            const services = await Services.findAll({ include: Patients });
             res.status(200).json(services);
         } catch (error) {
             console.error(error);
@@ -92,7 +107,7 @@ class ServicesController {
     async Update(req, res) {
         try {
             const { id } = req.params;
-            const { types_of_service, unit } = req.body;
+            const { types_of_service, unit, status } = req.body;
 
             const service = await Services.findByPk(id);
 
@@ -102,6 +117,7 @@ class ServicesController {
 
             service.types_of_service = types_of_service || service.types_of_service;
             service.unit = unit || service.unit;
+            service.status = status || service.status; 
 
             await service.save(); 
 

@@ -29,6 +29,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      status: {
+        type: Sequelize.ENUM('ATIVO', 'INATIVO'),
+        allowNull: false,
+        defaultValue: 'ATIVO',
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

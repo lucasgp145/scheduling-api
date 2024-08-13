@@ -1,5 +1,3 @@
-// src/app/models/associations.js
-
 import Patients from './Patients';
 import Services from './Services';
 

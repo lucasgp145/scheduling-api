@@ -4,7 +4,7 @@ import SchemaValidator from './helpers/schema-validator';
 import ServiceSchema from './app/schemas/Services'; 
 
 
-import PatientController from './app/controllers/PatientController';
+// import PatientController from './app/controllers/PatientController';
 import ServicesController from "./app/controllers/ServicesController";
 
 const routes = new Router();
