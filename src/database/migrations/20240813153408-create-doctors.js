@@ -1,38 +1,27 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('services', {
+    return queryInterface.createTable('doctors', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      types_of_service: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      unit: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      }, 
-      description: {
+      council: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      patient_id: { 
-        type: Sequelize.INTEGER,
+      cpf: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: 'patients',
-          key: 'id',
+        unique: true,
+        validate: {
+          len: [11, 11], // Exatamente 11 dígitos
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      status: {
-        type: Sequelize.ENUM('ATIVO', 'INATIVO'),
-        allowNull: false,
-        defaultValue: 'ATIVO',
       },
       created_at: {
         type: Sequelize.DATE,
@@ -48,6 +37,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('services');
+    return queryInterface.dropTable('doctors');
   },
 };
