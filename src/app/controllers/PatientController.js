@@ -6,7 +6,6 @@ class PatientController {
             const patient = await PatientService.createPatient(req.body);
             return res.status(201).json(patient);
         } catch (error) {
-            console.error(error);
             return res.status(500).json({ error: 'Ocorreu um erro ao criar o paciente, informações erradas, ou paciente já existe.' });
         }
     }
@@ -16,7 +15,6 @@ class PatientController {
             const patients = await PatientService.getAllPatients();
             return res.status(200).json(patients);
         } catch (error) {
-            console.error(error);
             return res.status(500).json({ error: 'Ocorreu um erro ao buscar os pacientes.' });
         }
     }
@@ -31,7 +29,6 @@ class PatientController {
             }
             return res.status(200).json(patient);
         } catch (error) {
-            console.error(error);
             return res.status(500).json({ error: 'Ocorreu um erro ao buscar o paciente.' });
         }
     }
@@ -43,7 +40,6 @@ class PatientController {
             const patient = await PatientService.updatePatient(id, req.body);
             return res.status(200).json(patient);
         } catch (error) {
-            console.error(error);
             return res.status(500).json({ error: 'Ocorreu um erro ao atualizar o paciente.' });
         }
     }
@@ -55,7 +51,6 @@ class PatientController {
             await PatientService.deletePatient(id);
             return res.status(204).send();
         } catch (error) {
-            console.error(error);
             return res.status(500).json({ error: 'Ocorreu um erro ao deletar o paciente.' });
         }
     }

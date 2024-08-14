@@ -6,7 +6,6 @@ class ProceduresController {
             const procedure = await proceduresService.createProcedure(req.body);
             res.status(201).json(procedure);
         } catch (error) {
-            console.error(error);
             res.status(400).json({ error: error.message });
         }
     }
@@ -16,7 +15,6 @@ class ProceduresController {
             const procedures = await proceduresService.getAllProcedures();
             res.status(200).json(procedures);
         } catch (error) {
-            console.error(error);
             res.status(500).json({ error: 'Ocorreu um erro ao buscar os procedimentos.' });
         }
     }
@@ -27,7 +25,6 @@ class ProceduresController {
             const procedure = await proceduresService.getProcedureById(id);
             res.status(200).json(procedure);
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }
@@ -38,7 +35,6 @@ class ProceduresController {
             const procedure = await proceduresService.updateProcedure(id, req.body);
             res.status(200).json(procedure);
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }
@@ -49,7 +45,6 @@ class ProceduresController {
             await proceduresService.deleteProcedure(id);
             res.status(204).send();
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }

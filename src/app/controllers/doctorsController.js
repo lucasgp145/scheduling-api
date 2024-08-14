@@ -6,7 +6,6 @@ class DoctorsController {
             const doctor = await doctorsService.createDoctor(req.body);
             res.status(201).json(doctor);
         } catch (error) {
-            console.error(error);
             res.status(400).json({ error: error.message });
         }
     }
@@ -16,7 +15,6 @@ class DoctorsController {
             const doctors = await doctorsService.getAllDoctors();
             res.status(200).json(doctors);
         } catch (error) {
-            console.error(error);
             res.status(500).json({ error: 'Ocorreu um erro ao buscar os médicos.' });
         }
     }
@@ -27,7 +25,6 @@ class DoctorsController {
             const doctor = await doctorsService.getDoctorById(id);
             res.status(200).json(doctor);
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }
@@ -38,7 +35,6 @@ class DoctorsController {
             const doctor = await doctorsService.updateDoctor(id, req.body);
             res.status(200).json(doctor);
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }
@@ -49,7 +45,6 @@ class DoctorsController {
             await doctorsService.deleteDoctor(id);
             res.status(204).send();
         } catch (error) {
-            console.error(error);
             res.status(404).json({ error: error.message });
         }
     }
